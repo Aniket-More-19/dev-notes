@@ -1,0 +1,1 @@
+This is frontend of dev-notes application.
