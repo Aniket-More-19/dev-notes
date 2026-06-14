@@ -2,69 +2,59 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-todos = [
+notes = [
     {
         "id": 1,
-        "todo": "Go to GYM",
-        "completed": False,
-        "priority": "medium",
+        "note": "Write .Dockerfile for dev-notes backend",
         "created_at": "2026-06-01T12:00:00Z",
         "updated_at": "2026-06-01T12:00:00Z",
     },
     {
         "id": 2,
-        "todo": "Learn CI/CD",
-        "completed": False,
-        "priority": "high",
+        "note": "Add CI workflow for dev-notes",
         "created_at": "2026-06-01T12:00:00Z",
         "updated_at": "2026-06-01T12:00:00Z",
     },
     {
         "id": 3,
-        "todo": "Go to market",
-        "completed": False,
-        "priority": "low",
+        "note": "Check failing tests for note.py",
         "created_at": "2026-06-01T12:00:00Z",
         "updated_at": "2026-06-01T12:00:00Z",
     },
 ]
 
 @app.get("/")
-async def getAllTodos():
-    return {"todos": todos}
+async def getAllNotes():
+    return {"notes": notes}
 
 @app.get("/{id}")
-async def getTodoById(id: int):
-    for todo in todos:
-        if todo["id"] == id:
-            return todo
-    return {"error": "Todo not found"}
+async def getNoteById(id: int):
+    for note in notes:
+        if note["id"] == id:
+            return note
+    return {"error": "Note not found"}
 
-@app.post("/createTodo")
-async def createTodo(todo: dict):
-    todos.append({
-        "id": len(todos) + 1,
-        "todo": todo["todo"],
-        "completed": todo["completed"],
-        "priority": todo["priority"],
-        "created_at": todo["created_at"],
-        "updated_at": todo["updated_at"],
+@app.post("/createNote")
+async def createNote(note: dict):
+    notes.append({
+        "id": len(notes) + 1,
+        "note": note["note"],
+        "created_at": note["created_at"],
+        "updated_at": note["updated_at"],
     })
 
-@app.put("/updateTodo/")
-async def updateTodo(id: int, updatedTodo: dict):
-    for todo in todos:
-        if todo["id"] == id:
-            todo["todo"]=updatedTodo["todo"]
-            todo["completed"]=updatedTodo["completed"]
-            todo["priority"]=updatedTodo["priority"]
-            todo["created_at"]=updatedTodo["created_at"]
-            todo["updated_at"]=updatedTodo["updated_at"]
+@app.put("/updateNote")
+async def updateNote(id: int, updatedNote: dict):
+    for note in notes:
+        if note["id"] == id:
+            note["todo"]=updatedNote["todo"]
+            note["created_at"]=updatedNote["created_at"]
+            note["updated_at"]=updatedNote["updated_at"]
             break
 
-@app.delete("/deleteTodo/{id}")
-async def deleteTodo(id: int):
-    for todo in todos:
-        if todo["id"] == id:
-            todos.pop(todos.index(todo))
-            return {"message": "Todo deleted successfully"}
+@app.delete("/deleteNote/{id}")
+async def deleteNote(id: int):
+    for note in notes:
+        if note["id"] == id:
+            notes.pop(notes.index(note))
+            return {"message": "Note deleted successfully"}
