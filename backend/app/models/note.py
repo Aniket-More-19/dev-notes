@@ -1,20 +1,20 @@
 from typing import Optional
 from pydantic import BaseModel, Field
 
-class Note(BaseModel):
+class Note:
     id: int
     note: str
     created_at: str
     updated_at: str
 
-    def __init__(self, id, note, created_at, updated_at):
+    def __init__(self, id: int, note: str, created_at: str, updated_at: str):
         self.id = id
-        self.note = note,
+        self.note = note
         self.created_at = created_at
         self.updated_at = updated_at
 
 
-class NoteRequest:
+class NoteRequest(BaseModel):
     id: Optional[int] = None
     note: str = Field(min_length = 5)
     created_at: str
