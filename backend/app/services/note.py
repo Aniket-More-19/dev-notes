@@ -16,7 +16,7 @@ class NoteService:
     
     async def get_note_by_id(self, note_id: int):
         for note in NOTES:
-            if note["id"] == note_id:
+            if note.id == note_id:
                 return note
         raise HTTPException(status_code=404, detail="Note not found")
 
@@ -27,16 +27,16 @@ class NoteService:
 
     async def update_note(self, note_id: int, updatedNnote: NoteRequest):
         for i, note in enumerate(NOTES):
-            if note["id"] == note_id:
-                updated_note = Note(id=note_id, **updatedNnote.model_dump())
+            if note.id == note_id:
+                updated_note = Note(**updatedNnote.model_dump())
                 NOTES[i] = updated_note
                 return updated_note
         raise HTTPException(status_code=404, detail="Product not found")
 
 
     async def delete_note(self, note_id: int):
-        for i, note in NOTES:
-            if note["id"] == note_id:
+        for i, note in enumerate(NOTES):
+            if note.id == note_id:
                 NOTES.pop(i)
-                return {"message": "Note deleted successfully"}
+                return
         raise HTTPException(status_code=404, detail="Product not found")
