@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Path, Query, HTTPException, status
-from app.models.note import Note, NoteRequest
+from app.schemas.note import Note, NoteRequest
 from app.routes.router import router
 from app.services.note import NoteService
 
