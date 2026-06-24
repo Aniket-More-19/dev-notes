@@ -1,6 +1,6 @@
 from typing import Optional
 from fastapi import HTTPException
-from app.models.note import Note, NoteRequest
+from app.schemas.note import Note, NoteRequest
 
 
 NOTES = [
