@@ -30,7 +30,6 @@ class NoteService:
             raise HTTPException(status_code=404, detail="Note not found")
         return note
 
-
     async def create_note(self, note_request: NoteRequest, db: Session):
         try:
             query = text("""
